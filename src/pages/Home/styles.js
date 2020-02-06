@@ -35,5 +35,5 @@ export const Description = styled.Text`
 `;
 
 export const Scroll = styled.ScrollView`
-  border-radius: 15;
+  border-radius: 15px;
 `;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Plataform, StyleSheet, StatusBar, View } from 'react-native';
 import * as Font from 'expo-font';
 
+import color from './src/constants/color';
 import Home from './src/pages/Home';
 
 export default class App extends React.Component {
@@ -15,9 +16,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={style.bg}>
-        <Home />
-      </View>
+      <>
+        <StatusBar barStyle="light-content" color={color.warning}/>
+        <View style={style.bg}>
+          <Home />
+        </View>
+      </>
     );
   }
 }
@@ -26,5 +30,6 @@ const style = StyleSheet.create({
   bg: {
     flex: 1,
     backgroundColor: '#282A36',
+    paddingTop: Platform.OS === 'android' ? 30 : 0,
   }
 });
