@@ -9,6 +9,10 @@ import HomeCard from '../../components/HomeCard';
 import color from '../../constants/color';
 
 export default class Home extends Component {
+  static navigationOptions = {
+    headerShown: false,
+  };
+
   render() {
     var notificationColor = color.warning;
 

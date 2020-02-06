@@ -5,8 +5,8 @@ import { Platform, StyleSheet, StatusBar, View } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
+import Navigation from './src/navigation';
 import color from './src/constants/color';
-import Home from './src/pages/Home';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,10 +29,8 @@ export default function App() {
   }
   return (
     <>
-      <StatusBar barStyle="light-content" color={color.warning} />
-      <View style={style.bg}>
-        <Home />
-      </View>
+      <StatusBar barStyle="light-content" />
+      <Navigation />
     </>
   );
 }
@@ -40,7 +38,7 @@ export default function App() {
 const style = StyleSheet.create({
   bg: {
     flex: 1,
-    backgroundColor: '#282A36',
+    backgroundColor: color.background,
     paddingTop: Platform.OS === 'android' ? 30 : 0,
   }
 });

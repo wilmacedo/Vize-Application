@@ -1,8 +1,13 @@
 import styled from 'styled-components/native';
+import color from '../../constants/color';
+
+import { Platform } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
   padding: 10px 20px 0px;
+  background-color: ${color.background};
+  padding-top: ${Platform.OS === 'android' ? 50 : 0}px;
 `;
 
 export const Header = styled.View`
@@ -11,7 +16,7 @@ export const Header = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: #fff;
+  color: ${color.white};
   font-size: 26px;
   font-family: 'roboto-light';
 `;
