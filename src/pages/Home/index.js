@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, Header, Title, Notification, Description } from './styles';
+import { Container, Header, Title, Notification, Description, Scroll } from './styles';
 
 import HomeCard from '../../components/HomeCard';
 
@@ -24,15 +24,19 @@ export default class Home extends Component {
         <Container>
           <Header>
             <Title>{time}, Wilson</Title>
-            <Ionicons name="ios-menu" size={30} color={color.darkWhite} />
+            <Ionicons name="ios-apps" size={30} color={color.darkWhite} />
           </Header>
-          <Notification>
-            <Ionicons name="ios-flash" size={20} color={color.warning} />
-            <Description>2 Notificações pendentes</Description>
-            <Ionicons name="ios-arrow-round-forward" size={25}
-              color={{ color: notificationColor }} />
-          </Notification>
-          <HomeCard />
+          <TouchableOpacity>
+            <Notification>
+              <Ionicons name="ios-flash" size={20} color={notificationColor} />
+              <Description>2 Notificações pendentes</Description>
+              <Ionicons name="ios-arrow-round-forward" size={25}
+                color={color.darkWhite} />
+            </Notification>
+          </TouchableOpacity>
+          <Scroll showsHorizontalScrollIndicator={false}>
+            <HomeCard />
+          </Scroll>
         </Container>
       </SafeAreaView>
     );

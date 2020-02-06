@@ -33,3 +33,7 @@ export const Description = styled.Text`
   padding-left: 10px;
   flex: 1;
 `;
+
+export const Scroll = styled.ScrollView`
+  border-radius: 15;
+`;
