@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ImageBackground, View, TouchableWithoutFeedback } from 'react-native';
+import { ImageBackground, View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 import { Container, Title, Info, IconRight, IconEnd, CircleButton, IconText } from './styles';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,6 +9,12 @@ import color from '../../constants/color';
 
 export default class HomeCard extends Component {
   render() {
+    const style = StyleSheet.create({
+      platformPadding: {
+        paddingTop: Platform.OS === 'ios' ? 3 : 0,
+      }
+    });
+
     return (
       <TouchableWithoutFeedback
       onPress={ () => {
@@ -22,11 +28,11 @@ export default class HomeCard extends Component {
             <Title>Quarto</Title>
             <Info>
               <CircleButton>
-                <Ionicons name="ios-sunny" size={25} color={color.white} style={{ paddingTop: 3, }} />
+                <Ionicons name="ios-sunny" size={25} color={color.white} style={style.platformPadding} />
               </CircleButton>
               <IconRight>
                 <CircleButton>
-                  <Ionicons name="ios-videocam" size={25} color={color.white} style={{ paddingTop: 3, }} />
+                  <Ionicons name="ios-videocam" size={25} color={color.white} style={style.platformPadding} />
                 </CircleButton>
               </IconRight>
               <View style={{ flex: 1, }} />
