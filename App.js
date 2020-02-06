@@ -15,7 +15,16 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Home />
+      <View style={style.bg}>
+        <Home />
+      </View>
     );
   }
 }
+
+const style = StyleSheet.create({
+  bg: {
+    flex: 1,
+    backgroundColor: '#282A36',
+  }
+});
