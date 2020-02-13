@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { ImageBackground, View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { ImageBackground, View, StyleSheet } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { Container, Title, Info, IconRight, IconEnd, CircleButton, IconText } from './styles';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,10 +17,7 @@ export default class HomeCard extends Component {
     });
 
     return (
-      <TouchableWithoutFeedback
-      onPress={ () => {
-        console.log("olaaa");
-      }}>
+      <TouchableWithoutFeedback>
         <ImageBackground
           source={require('../../../assets/images/bedroom.jpg')}
           style={{ marginTop: 25, height: 200 }}
@@ -27,7 +25,7 @@ export default class HomeCard extends Component {
           <Container>
             <Title>Quarto</Title>
             <Info>
-              <CircleButton>
+              <CircleButton onPress={() => {console.log("ola")}}>
                 <Ionicons name="ios-sunny" size={25} color={color.white} style={style.platformPadding} />
               </CircleButton>
               <IconRight>

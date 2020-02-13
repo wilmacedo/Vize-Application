@@ -7,12 +7,13 @@ export const Container = styled.View`
   flex: 1;
   padding: 10px 20px 0px;
   background-color: ${color.background};
-  padding-top: ${Platform.OS === 'android' ? 50 : 0}px;
+  padding-top: ${Platform.OS === 'android' ? 40 : 0}px;
 `;
 
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Title = styled.Text`
@@ -22,19 +23,17 @@ export const Title = styled.Text`
 `;
 
 export const Notification = styled.View`
-  margin-left: -3px;
-  margin-right: -5px;
   margin-top: 15px;
   flex-direction: row;
   border-width: 1px;
   border-radius: 30px;
   align-items: center;
   padding: 5px 10px;
-  border-color: #465170;
+  border-color: ${color.semiDark};
 `;
 
 export const Description = styled.Text`
-  color: #bdbdbd;
+  color: ${color.darkWhite};
   padding-left: 10px;
   flex: 1;
 `;

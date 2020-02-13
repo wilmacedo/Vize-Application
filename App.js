@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-import { Platform, StyleSheet, StatusBar, View } from 'react-native';
+import { StatusBar } from 'react-native';
 
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 import Navigation from './src/navigation';
-import color from './src/constants/color';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -34,11 +33,3 @@ export default function App() {
     </>
   );
 }
-
-const style = StyleSheet.create({
-  bg: {
-    flex: 1,
-    backgroundColor: color.background,
-    paddingTop: Platform.OS === 'android' ? 30 : 0,
-  }
-});

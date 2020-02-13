@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import color from '../../constants/color';
 
 export const Container = styled.View`
   flex: 1;
@@ -8,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: #fff;
+  color: ${color.white};
   font-family: 'roboto';
   font-size: 26px;
 `;
@@ -42,6 +43,6 @@ export const IconEnd = styled.View`
 `;
 
 export const IconText = styled.Text`
-  color: #fff;
+  color: ${color.white};
   padding-left: 8px;
 `;
