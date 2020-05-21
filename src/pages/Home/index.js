@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import { SafeAreaView, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView, View, Button, StatusBar, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Header, Title, Notification, Description, Scroll } from './styles';
 
@@ -18,15 +17,19 @@ export default class Home extends Component {
     const { navigation } = this.props;
     var notificationColor = color.warning;
 
+    var date = new Date();
     var time;
-    if (new Date().getHours() < 18) {
+    if (date.getHours() > 0 && date.getHours() <= 12) {
       time = "Bom dia";
+    } else if (date.getHours() > 12 && date.getHours() < 18) {
+      time = "Boa tarde";
     } else {
       time = "Boa noite";
     }
 
     return (
       <View style={{ flex: 1, backgroundColor: color.background }}>
+        <StatusBar barStyle='light-content' />
         <SafeAreaView style={{ flex: 1 }}>
           <Container>
             <Header>
@@ -44,7 +47,13 @@ export default class Home extends Component {
               </Notification>
             </TouchableOpacity>
             <Scroll showsHorizontalScrollIndicator={false}>
-              <HomeCard />
+              <HomeCard navigation={navigation} />
+              <View>
+                <Button
+                title='Teste'
+                  onPress={() => this.props.navigation.navigate('Login')}
+                />
+              </View>
             </Scroll>
           </Container>
         </SafeAreaView>

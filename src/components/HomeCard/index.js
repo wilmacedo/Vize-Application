@@ -17,7 +17,10 @@ export default class HomeCard extends Component {
     });
 
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          this.props.navigation.navigate('Room')
+        }}>
         <ImageBackground
           source={require('../../../assets/images/bedroom.jpg')}
           style={{ marginTop: 25, height: 200 }}

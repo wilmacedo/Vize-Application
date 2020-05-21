@@ -7,7 +7,7 @@ export const Container = styled.View`
   flex: 1;
   padding: 10px 20px 0px;
   background-color: ${color.background};
-  padding-top: ${Platform.OS === 'android' ? 40 : 0}px;
+  padding-top: ${Platform.OS === 'android' ? 40 : 5}px;
 `;
 
 export const Header = styled.View`
