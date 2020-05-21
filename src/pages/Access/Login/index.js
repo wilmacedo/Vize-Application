@@ -4,18 +4,17 @@ import { SafeAreaView, StatusBar, TouchableOpacity, Text } from 'react-native';
 import { Container, Logo, Title, ButtonContainer, ButtonText, SingupContainer, SignupText } from './styles';
 
 import color from '../../../constants/color';
+var darkMode = require('../../../services/darkMode');
 
 export default class Login extends Component {
   static navigationOptions = {
     headerShown: false,
   };
 
-  darkMode = () => new Date().getHours() >= 18 ? true : false;
-
   render() {
     var barStyle, areaBackground, logoColor, titleColor;
 
-    if (this.darkMode()) {
+    if (darkMode()) {
       barStyle = 'light-content';
       areaBackground = color.darkest;
       logoColor = color.white;

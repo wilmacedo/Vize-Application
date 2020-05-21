@@ -48,12 +48,6 @@ export default class Home extends Component {
             </TouchableOpacity>
             <Scroll showsHorizontalScrollIndicator={false}>
               <HomeCard navigation={navigation} />
-              <View>
-                <Button
-                title='Teste'
-                  onPress={() => this.props.navigation.navigate('Login')}
-                />
-              </View>
             </Scroll>
           </Container>
         </SafeAreaView>

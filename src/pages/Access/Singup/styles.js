@@ -4,7 +4,6 @@ import color from '../../../constants/color';
 
 export const Container = styled.View`
   padding: 20px 50px 0 30px;
-  background-color: ${color.darkest};
   flex: 1;
 `;
 
@@ -39,7 +38,6 @@ export const ImageButton = styled.TouchableOpacity`
   width: 75px;
   height: 75px;
   border-radius: 40px;
-  border-color: ${color.white};
   border-width: 2px;
   align-items: center;
   justify-content: center;
@@ -47,7 +45,6 @@ export const ImageButton = styled.TouchableOpacity`
 
 export const ImageText = styled.Text`
   margin-left: 10px;
-  color: ${color.darkWhite};
 `;
 
 export const FormContainer = styled.View`
