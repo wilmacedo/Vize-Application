@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import color from '../../../constants/color';
+import { color } from '../../../utils/general';
 
 export const Container = styled.View`
   padding: 20px 50px 0 30px;

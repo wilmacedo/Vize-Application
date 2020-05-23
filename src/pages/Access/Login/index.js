@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 
-import { SafeAreaView, StatusBar, TouchableOpacity, Text } from 'react-native';
+import { SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import { Container, Logo, Title, ButtonContainer, ButtonText, SingupContainer, SignupText } from './styles';
 
-import color from '../../../constants/color';
-var darkMode = require('../../../services/darkMode');
+import { color, isDarkMode } from '../../../utils/general';
 
 export default class Login extends Component {
-  static navigationOptions = {
-    headerShown: false,
-  };
-
   render() {
     var barStyle, areaBackground, logoColor, titleColor;
 
-    if (darkMode()) {
+    if (isDarkMode()) {
       barStyle = 'light-content';
       areaBackground = color.darkest;
       logoColor = color.white;
@@ -28,7 +23,7 @@ export default class Login extends Component {
 
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: areaBackground }}>
-        <StatusBar barStyle={barStyle} />
+        <StatusBar barStyle={barStyle} backgroundColor={areaBackground} />
         <Container>
           <Logo style={{ borderColor: logoColor }} />
 

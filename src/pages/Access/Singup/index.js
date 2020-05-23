@@ -5,9 +5,9 @@ import { Container, Title, TitleText, Step, StepInformation, FirstContainer, Ima
 import { Feather, AntDesign } from '@expo/vector-icons';
 
 import FormPath from '../../../components/FormPath';
+import BarStatus from '../../../components/BarStatus';
 
-import color from '../../../constants/color';
-var darkMode = require('../../../services/darkMode');
+import { color, isDarkMode } from '../../../utils/general';
 
 export default class Signup extends Component {
   state = {
@@ -22,7 +22,7 @@ export default class Signup extends Component {
     let page = this.state.page;
     var borderColor, textColor;
 
-    if (darkMode()) {
+    if (isDarkMode()) {
       borderColor = color.white;
       textColor = color.darkWhite;
     } else {
@@ -57,6 +57,9 @@ export default class Signup extends Component {
             <FormPath title={"Senha"} placeholder={"Senha"} isPassword={true} />
           </FormContainer>
           <FormContainer>
+            <FormPath title={"Confirmar Senha"} placeholder={"Senha"} isPassword={true} />
+          </FormContainer>
+          <FormContainer>
             <FormPath title={"Código de acesso"} placeholder={"A1B-C2D-3E4"} />
           </FormContainer>
           <ProcessButton onPress={() => this.setState({ page: 1 })}>
@@ -70,7 +73,7 @@ export default class Signup extends Component {
   render() {
     var iconColor, titleColor, backgroundColor;
 
-    if (darkMode()) {
+    if (isDarkMode()) {
       iconColor = color.white;
       titleColor = color.white;
       backgroundColor = color.darkest;
@@ -82,8 +85,9 @@ export default class Signup extends Component {
 
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
-        <SafeAreaView style={{ flex: 1, backgroundColor: backgroundColor }}>
-          <Container style={{ backgroundColor: backgroundColor }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor }}>
+          <BarStatus backgroundColor={backgroundColor} />
+          <Container style={{ backgroundColor }}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Login')}>
               <Feather name="arrow-left" size={18} color={iconColor} />

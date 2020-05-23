@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { Container, Title, TextBox } from './styles';
 
-import color from '../../constants/color';
-var darkMode = require('../../services/darkMode');
+import { color, isDarkMode } from '../../utils/general';
 
 export default class FormPath extends Component {
   state = {
@@ -13,7 +12,7 @@ export default class FormPath extends Component {
   render() {
     var placeholderColor, titleColor, textColor;
 
-    if (darkMode()) {
+    if (isDarkMode()) {
       placeholderColor = '#575b75';
       titleColor = color.white;
       textColor = color.white;

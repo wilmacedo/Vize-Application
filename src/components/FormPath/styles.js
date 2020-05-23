@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import color from '../../constants/color';
+import { color } from '../../utils/general';
 
 export const Container = styled.View`
   border-bottom-width: 1px;

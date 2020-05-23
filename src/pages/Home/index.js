@@ -1,57 +1,132 @@
 import React, { Component } from 'react';
 
-import { SafeAreaView, View, Button, StatusBar, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Container, Header, Title, Notification, Description, Scroll } from './styles';
+import { TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import {
+  SafeAreaView,
+  Container,
+  TopContainer,
+  ProfileContainer,
+  ProfileImage,
+  TitleContainer,
+  WelcomeText,
+  UserText,
+  CardContainer,
+  CardItem,
+  CardText,
+  CardImage,
+  Title,
+  TitleText,
+  QuickActionsContainer,
+  Scroll,
+} from './styles';
+import { Feather, Ionicons, MaterialCommunityIcons, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import Carousel from 'react-native-snap-carousel';
+import { LinearGradient } from 'expo-linear-gradient'
+import TabIcon from '../../components/TabIcon';
+import BarStatus from '../../components/BarStatus';
 
-import HomeCard from '../../components/HomeCard';
 
-import color from '../../constants/color';
+import { color, profile, isDarkMode } from '../../utils/general';
+
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.84);
 
 export default class Home extends Component {
-  static navigationOptions = {
-    headerShown: false,
-  };
+
+  _renderItem = ({ item, index }) => {
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          this.props.navigation.navigate('Room', { room: item });
+        }}
+      >
+        <CardItem>
+          <CardImage source={item.image} imageStyle={{ borderRadius: 20 }}>
+            <LinearGradient
+              colors={['transparent', 'rgba(0, 0, 0, 0.5)']}
+              end={[0.5, 1.3]}
+              style={{ flex: 1, borderRadius: 20 }}>
+              <CardText>{item.title}</CardText>
+            </LinearGradient>
+          </CardImage>
+        </CardItem>
+      </TouchableWithoutFeedback>
+    );
+  }
 
   render() {
-    const { navigation } = this.props;
-    var notificationColor = color.warning;
-
-    var date = new Date();
-    var time;
-    if (date.getHours() > 0 && date.getHours() <= 12) {
-      time = "Bom dia";
-    } else if (date.getHours() > 12 && date.getHours() < 18) {
-      time = "Boa tarde";
-    } else {
-      time = "Boa noite";
-    }
+    var iconColor = isDarkMode() ? color.moreLight : color.darkest;
 
     return (
-      <View style={{ flex: 1, backgroundColor: color.background }}>
-        <StatusBar barStyle='light-content' />
-        <SafeAreaView style={{ flex: 1 }}>
-          <Container>
-            <Header>
-              <Title>{time}, Wilson</Title>
-              <TouchableOpacity>
-                <Ionicons name="ios-apps" size={30} color={color.darkWhite} />
-              </TouchableOpacity>
-            </Header>
+      <SafeAreaView>
+        <BarStatus backgroundColor={'#f2f2f2'}/>
+        <Container>
+          <TopContainer>
             <TouchableOpacity>
-              <Notification>
-                <Ionicons name="ios-flash" size={20} color={notificationColor} />
-                <Description>2 Notificações pendentes</Description>
-                <Ionicons name="ios-arrow-round-forward" size={25}
-                  color={color.darkWhite} />
-              </Notification>
+              <Feather name="menu" size={26} color={iconColor} />
             </TouchableOpacity>
-            <Scroll showsHorizontalScrollIndicator={false}>
-              <HomeCard navigation={navigation} />
+
+            <ProfileContainer>
+              <ProfileImage source={require('../../../assets/images/perfil.jpg')} />
+            </ProfileContainer>
+          </TopContainer>
+          <TitleContainer>
+            <WelcomeText>Olá novamente,</WelcomeText>
+            <UserText>{profile[0].name}</UserText>
+          </TitleContainer>
+          <CardContainer>
+            <Title>
+              <TitleText>Cômodos</TitleText>
+
+              <TouchableOpacity>
+                <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
+              </TouchableOpacity>
+            </Title>
+            <Carousel
+              ref={ref => this.carousel = ref}
+              data={profile[0].rooms}
+              renderItem={this._renderItem}
+              sliderWidth={SLIDER_WIDTH}
+              containerCustomStyle={{ marginLeft: -30 }}
+              inactiveSlideScale={0.90}
+              itemWidth={ITEM_WIDTH}
+              loop={true}
+            />
+          </CardContainer>
+          <QuickActionsContainer>
+            <Title>
+              <TitleText>Ações rápidas</TitleText>
+
+              <TouchableOpacity>
+                <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
+              </TouchableOpacity>
+            </Title>
+
+            <Scroll horizontal={true} showsHorizontalScrollIndicator={false}>
+              <TouchableOpacity>
+                <TabIcon
+                  icon={<MaterialCommunityIcons name="door" size={32} color={color.darkest} />}
+                  name={'Portas'}
+                  inScrollView={true}
+                  firstScrollView={true} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <TabIcon
+                  icon={<Entypo name="light-bulb" size={30} color={color.darkest} />}
+                  name={'Luzes'}
+                  inScrollView={true} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <TabIcon
+                  icon={<FontAwesome5 name="temperature-low" size={24} color={color.darkest} />}
+                  name={'Temperatura'}
+                  inScrollView={true}
+                  lastScrollView={true} />
+              </TouchableOpacity>
             </Scroll>
-          </Container>
-        </SafeAreaView>
-      </View>
+          </QuickActionsContainer>
+        </Container>
+      </SafeAreaView>
     );
   }
 }
