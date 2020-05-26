@@ -9,15 +9,18 @@ export default class TabIcon extends Component {
     var marginLeft = this.props.inScrollView ? 20 : 0;
     if (this.props.firstScrollView) marginLeft += 10;
     var marginRight = this.props.lastScrollView ? 30 : 0;
+    var fontSize = 16;
 
-    if (this.props.isSelected != null && !this.props.isSelected) {
-      backgroundColor = 'rgba(226, 227, 233, 0.5)';
+    if (this.props.name.length > 11 && this.props.name.length <= 15) {
+      fontSize = 14;
+    } else if (this.props.name.length > 15) {
+      fontSize = 13;
     }
-    
+
     return (
       <Container style={{ backgroundColor, marginLeft, marginRight }}>
         <Icon>{this.props.icon}</Icon>
-        <Title>{this.props.name}</Title>
+        <Title style={{ fontSize }}>{this.props.name}</Title>
       </Container>
     );
   }

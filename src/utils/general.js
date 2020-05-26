@@ -29,7 +29,7 @@ export const color = {
 
 export function isDarkMode() {
   let darkMode = new Date().getHours() >= 18 ? true : false;
-  return darkMode;
+  return !darkMode;
 }
 
 export const profile = [

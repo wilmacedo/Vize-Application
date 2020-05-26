@@ -25,7 +25,12 @@ export default class FormPath extends Component {
     return (
       <Container style={{ borderBottomColor: this.state.borderColor }}>
         <Title style={{ color: titleColor }}>{this.props.title.toUpperCase()}</Title>
-        <TextBox style={{ color: textColor }} placeholder={this.props.placeholder} placeholderTextColor={placeholderColor} keyboardType={this.props.keyboardType} secureTextEntry={this.props.isPassword}
+        <TextBox style={{ color: textColor }} 
+          placeholder={this.props.placeholder} 
+          placeholderTextColor={placeholderColor} 
+          keyboardType={this.props.keyboardType} 
+          secureTextEntry={this.props.isPassword}
+          autoCorrect={false}
           onFocus={() => this.setState({ borderColor: color.select })}
           onEndEditing={() => this.setState({ borderColor: color.light })} />
       </Container>

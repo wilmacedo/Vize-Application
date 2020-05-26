@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 
 import {
   Container,
@@ -21,9 +21,9 @@ import {
   ActionBoxStyle,
 } from './styles';
 
-import { Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 
-import { color } from '../../utils/general';
+import { color, isDarkMode } from '../../utils/general';
 
 import BarStatus from '../../components/BarStatus';
 import TabIcon from '../../components/TabIcon';
@@ -33,32 +33,52 @@ export default class Room extends Component {
 
   state = {
     value: false,
-    primarySelected: true,
-    selected: null,
   };
 
-  setSelected = (name) => {
-    if (this.state.selected === null) {
-      this.setState({ selected: name });
-      return true;
-    }
-    return false;
-  }
-
   renderItem = (room) => {
-
-    return room.map(action => {
-      <TabIcon name={action.name} icon={action.icon} size={32} color={color.darkest}
-        isSelected={this.setSelected(action.name)}
-      />
+    return room.map((action, i) => {
+      var tab;
+      if (room.length === i + 1) {
+        tab = <TabIcon
+          name={action.name}
+          icon={action.icon}
+          size={32}
+          color={color.darkest}
+          inScrollView={true}
+          lastScrollView={true}
+        />
+      } else {
+        tab = <TabIcon
+          name={action.name}
+          icon={action.icon}
+          size={32}
+          color={color.darkest}
+          inScrollView={true}
+        />
+      }
+      return (
+        <TouchableOpacity key={action.name}>
+          {tab}
+        </TouchableOpacity>
+      );
     });
-  }
+  };
 
   render() {
     var prop = this.props.route.params.room;
+    var backgroundColor, styleBar;
+    
+    if (isDarkMode()) {
+      backgroundColor = color.darkest;
+      styleBar = 'light-content';
+    } else {
+      backgroundColor = color.white;
+      styleBar = 'dark-content';
+    }
 
     return (
       <Container>
+        <BarStatus styleBar={Platform.OS === 'ios' ? 'light-content' : styleBar} backgroundColor={backgroundColor} />
         <ImageContainer source={prop.image} imageStyle={ImageStyle.style}>
           <SafeView>
             <LeftSide>
@@ -83,7 +103,6 @@ export default class Room extends Component {
                 buttonWidth={20}
                 inactiveBackgroundColor={'rgba(242, 242, 242, 0.5)'}
                 activeBackgroundColor={'rgba(75, 144, 226, 1)'}
-                switchBorderColor={'black'}
                 onChangeValue={() => this.setState({ value: !this.state.value })}
               />
             </RightSide>
@@ -91,18 +110,16 @@ export default class Room extends Component {
         </ImageContainer>
         <ActionContainer>
           <ActionTitleContainer>
-            <TouchableOpacity
-              onPress={() => this.setState({ primarySelected: true })}
-            >
-              <ActionTitle style={{ opacity: this.state.primarySelected ? 1 : 0.7 }}>Controles</ActionTitle>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.setState({ primarySelected: false })}
-            >
-              <ActionTitle style={{ opacity: this.state.primarySelected ? 0.7 : 1 }}>Adicionais</ActionTitle>
+            <ActionTitle>Dispositivos</ActionTitle>
+            <TouchableOpacity>
+              <Ionicons name="ios-add-circle-outline" size={24} color={color.darkest} />
             </TouchableOpacity>
           </ActionTitleContainer>
-          <ActionBox contentContainerStyle={ActionBoxStyle.style} showsHorizontalScrollIndicator={false} horizontal={true}>
+          <ActionBox
+            contentContainerStyle={ActionBoxStyle.style}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+          >
             {this.renderItem(prop.control)}
           </ActionBox>
         </ActionContainer>

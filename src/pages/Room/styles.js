@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, Plataform } from 'react-native';
 
 import { color, isDarkMode } from '../../utils/general';
 
 var bgColor, textColor;
+var imagePercent = Platform.OS === 'ios' ? 0.55 : 0.6;
 
 if (isDarkMode()) {
   bgColor = color.darkest;
@@ -20,7 +21,8 @@ export const Container = styled.View`
 `;
 
 export const ImageContainer = styled.ImageBackground`
-  height: ${Dimensions.get('window').height * 0.55}px;
+  padding-top: ${Platform.OS === 'ios' ? 0 : 20}px;
+  height: ${Dimensions.get('window').height * imagePercent}px;
   background-color: black;
   border-bottom-left-radius: 40px;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.5);
@@ -81,7 +83,7 @@ export const ActionContainer = styled.View`
 export const ActionTitleContainer = styled.View`
   margin: 40px 30px 0 30px;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 
 export const ActionTitle = styled.Text`
@@ -92,7 +94,8 @@ export const ActionTitle = styled.Text`
 
 export const ActionBox = styled.ScrollView`
   width: ${Dimensions.get('window').width}px;
-  height: ${Dimensions.get('window').height * 0.38}px;
+  height: ${Dimensions.get('window').height * 0.3}px;
+  padding-left: 10px;
 `;
 
 export const ActionBoxStyle = StyleSheet.create({
