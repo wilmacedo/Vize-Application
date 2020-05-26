@@ -29,7 +29,7 @@ export const color = {
 
 export function isDarkMode() {
   let darkMode = new Date().getHours() >= 18 ? true : false;
-  return !darkMode;
+  return darkMode;
 }
 
 export const profile = [
@@ -44,11 +44,11 @@ export const profile = [
         control: [
           {
             name: 'Luz Meio',
-            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+            icon: <FontAwesome5 name="lightbulb" size={24} color={color.darkest} />,
           },
           {
             name: 'Ar Condicionado',
-            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+            icon: <FontAwesome5 name="temperature-low" size={24} color={color.darkest} />
           }
         ]
       },
@@ -59,19 +59,19 @@ export const profile = [
         control: [
           {
             name: 'Luz Entrada',
-            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+            icon: <FontAwesome5 name="lightbulb" size={24} color={color.darkest} />,
           },
           {
             name: 'Luz Mesa',
-            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+            icon: <FontAwesome5 name="lightbulb" size={24} color={color.darkest} />,
           },
           {
             name: 'Ar Condicionado',
-            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+            icon: <FontAwesome5 name="temperature-low" size={24} color={color.darkest} />
           },
           {
             name: 'Televisão',
-            icon: <FontAwesome5 name="tv" size={24} color="black" />
+            icon: <FontAwesome5 name="tv" size={24} color={color.darkest} />
           },
         ]
       },
@@ -82,15 +82,15 @@ export const profile = [
         control: [
           {
             name: 'Luz Mesa',
-            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+            icon: <FontAwesome5 name="lightbulb" size={24} color={color.darkest} />,
           },
           {
             name: 'Microondas',
-            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+            icon: <FontAwesome5 name="temperature-low" size={24} color={color.darkest} />
           },
           {
             name: 'Gelagua',
-            icon: <Entypo name="water" size={24} color="black" />
+            icon: <Entypo name="water" size={24} color={color.darkest} />
           }
         ]
       },

@@ -31,7 +31,7 @@ export const ImageContainer = styled.ImageBackground`
 export const ImageStyle = StyleSheet.create({
   style: {
     borderBottomLeftRadius: 40,
-    opacity: 0.5
+    opacity: 0.5,
   }
 });
 
@@ -45,7 +45,7 @@ export const LeftSide = styled.View`
 `;
 
 export const RightSide = styled.View`
-  margin-top: 190px;
+  margin-top: ${Platform.OS === 'ios' ? 170 : 160}px;
   justify-content: center;
   transform: rotate(-90deg);
 `;
@@ -62,7 +62,7 @@ export const Title = styled.Text`
 `;
 
 export const Data = styled.View`
-  margin-top: 80px;
+  margin-top: 30px;
 `;
 
 export const DataTitle = styled.Text`

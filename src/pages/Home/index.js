@@ -23,7 +23,7 @@ import {
 import TabIcon from '../../components/TabIcon';
 import BarStatus from '../../components/BarStatus';
 
-import { Feather, Ionicons, MaterialCommunityIcons, Entypo, FontAwesome5 } from '@expo/vector-icons';
+import { Feather, Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import Carousel from 'react-native-snap-carousel';
@@ -114,7 +114,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <TabIcon
-                    icon={<Entypo name="light-bulb" size={30} color={color.darkest} />}
+                    icon={<FontAwesome5 name="lightbulb" size={30} color={color.darkest} />}
                     name={'Luzes'}
                     inScrollView={true} />
                 </TouchableOpacity>

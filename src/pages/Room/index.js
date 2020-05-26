@@ -31,9 +31,13 @@ import Switch from 'react-native-customisable-switch';
 
 export default class Room extends Component {
 
-  state = {
-    value: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: false,
+      device: props.route.params.room.control[0],
+    };
+  }
 
   renderItem = (room) => {
     return room.map((action, i) => {
@@ -57,7 +61,11 @@ export default class Room extends Component {
         />
       }
       return (
-        <TouchableOpacity key={action.name}>
+        <TouchableOpacity key={action.name}
+          onPress={() => {
+            this.setState({ device: action })
+          }}
+        >
           {tab}
         </TouchableOpacity>
       );
@@ -67,7 +75,7 @@ export default class Room extends Component {
   render() {
     var prop = this.props.route.params.room;
     var backgroundColor, styleBar;
-    
+
     if (isDarkMode()) {
       backgroundColor = color.darkest;
       styleBar = 'light-content';
@@ -78,18 +86,36 @@ export default class Room extends Component {
 
     return (
       <Container>
-        <BarStatus styleBar={Platform.OS === 'ios' ? 'light-content' : styleBar} backgroundColor={backgroundColor} />
-        <ImageContainer source={prop.image} imageStyle={ImageStyle.style}>
+        <BarStatus
+          styleBar={Platform.OS === 'ios' ? 'light-content' : styleBar}
+          backgroundColor={backgroundColor}
+        />
+        <ImageContainer
+          source={prop.image}
+          imageStyle={ImageStyle.style}
+        >
           <SafeView>
             <LeftSide>
               <Icon>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.goBack()}
                 >
-                  <Feather name='arrow-left' size={20} color={color.white} />
+                  <Feather
+                    name='arrow-left'
+                    size={20}
+                    color={color.white}
+                  />
                 </TouchableOpacity>
               </Icon>
               <Title>{prop.name}</Title>
+              <Data>
+                <DataTitle>Dispositivo</DataTitle>
+                <DataInfo
+                  style={{ fontSize: 15, fontFamily: 'roboto-bold' }}
+                >
+                  {this.state.device.name}
+                </DataInfo>
+              </Data>
               <Data>
                 <DataTitle>Percentual de Uso</DataTitle>
                 <DataInfo>{this.state.value ? 100 : 0}%</DataInfo>
@@ -112,7 +138,11 @@ export default class Room extends Component {
           <ActionTitleContainer>
             <ActionTitle>Dispositivos</ActionTitle>
             <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={24} color={color.darkest} />
+              <Ionicons
+                name="ios-add-circle-outline"
+                size={24}
+                color={color.darkest}
+              />
             </TouchableOpacity>
           </ActionTitleContainer>
           <ActionBox
