@@ -1,6 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 
+import { Entypo, FontAwesome5 } from '@expo/vector-icons';
+
+export const debugMode = true;
+
 export const color = {
   primary: '#6272A4',
 
@@ -18,6 +22,7 @@ export const color = {
   success: '#00e600',
 
   background: '#282A36',
+  lighitBackground: '#f2f2f2',
   white: '#FFF',
   darkWhite: '#bdbdbd',
 }
@@ -33,16 +38,61 @@ export const profile = [
     email: 'wil.macedo.sa@gmail.com',
     rooms: [
       {
-        title: 'Quarto',
+        id: 1,
+        name: 'Quarto',
         image: require('../../assets/images/bedroom.jpg'),
+        control: [
+          {
+            name: 'Luz Meio',
+            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+          },
+          {
+            name: 'Ar Condicionado',
+            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+          }
+        ]
       },
       {
-        title: 'Sala',
+        id: 2,
+        name: 'Sala',
         image: require('../../assets/images/living.jpg'),
+        control: [
+          {
+            name: 'Luz Entrada',
+            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+          },
+          {
+            name: 'Luz Mesa',
+            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+          },
+          {
+            name: 'Ar Condicionado',
+            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+          },
+          {
+            name: 'Televisão',
+            icon: <FontAwesome5 name="tv" size={24} color="black" />
+          },
+        ]
       },
       {
-        title: 'Cozinha',
+        id: 3,
+        name: 'Cozinha',
         image: require('../../assets/images/kitchen.jpg'),
+        control: [
+          {
+            name: 'Luz Mesa',
+            icon: <FontAwesome5 name="lightbulb" size={24} color="black" />,
+          },
+          {
+            name: 'Microondas',
+            icon: <FontAwesome5 name="temperature-low" size={24} color="black" />
+          },
+          {
+            name: 'Gelagua',
+            icon: <Entypo name="water" size={24} color="black" />
+          }
+        ]
       },
     ]
   }

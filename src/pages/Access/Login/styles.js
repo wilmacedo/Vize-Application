@@ -33,6 +33,7 @@ export const ButtonContainer = styled.TouchableOpacity`
   align-items: center;
   left: 25%;
   box-shadow: 2px 5px 10px rgba(0, 189, 212, 0.5);
+  elevation: 3;
 `;
 
 export const ButtonText = styled.Text`

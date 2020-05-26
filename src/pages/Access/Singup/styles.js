@@ -61,6 +61,7 @@ export const ProcessButton = styled.TouchableOpacity`
   box-shadow: 2px 5px 10px rgba(34, 34, 34, 0.5);
   justify-content: center;
   align-items: center;
+  elevation: 3;
 `;
 
 export const ProcessText = styled.Text`

@@ -11,7 +11,7 @@ if (isDarkMode()) {
   textColor = color.moreLight;
   userTextColor = color.brightnessSelect;
 } else {
-  backgroundColor = '#f2f2f2';
+  backgroundColor = color.lighitBackground;
   textColor = color.darkest;
   userTextColor = color.textHighlight;
 }
@@ -36,6 +36,7 @@ export const ProfileContainer = styled.TouchableOpacity`
   width: 60px;
   border-radius: 30px;
   box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.3);
+  elevation: 3;
 `;
 
 export const ProfileImage = styled.Image`

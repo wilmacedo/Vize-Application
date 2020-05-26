@@ -2798,9 +2798,9 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-"hammerjs@git+https://github.com/naver/hammer.js.git":
+"hammerjs@https://github.com/naver/hammer.js.git":
   version "2.0.17-snapshot"
-  resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
+  resolved "https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
@@ -4412,6 +4412,11 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-customisable-switch@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-customisable-switch/-/react-native-customisable-switch-0.1.0.tgz#8df4f296467e8696d8cc44dd7619cf795fb441cb"
+  integrity sha1-jfTylkZ+hpbYzETddhnPeV+0Qcs=
+
 react-native-fade@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-fade/-/react-native-fade-1.0.3.tgz#e27cd5a75c0d09a9ee82d854fb3851006c228d23"
@@ -4534,6 +4539,13 @@ react-native-websocket@^1.0.2:
     scheduler "0.15.0"
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
+
+react-navigation-shared-element@^5.0.0-alpha1:
+  version "5.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/react-navigation-shared-element/-/react-navigation-shared-element-5.0.0-alpha1.tgz#29f2090d3f0eef626df93b8572ce5c192d5c46f2"
+  integrity sha512-zPlpvUV6RGsZv3lTDanIN3ARvqABHDrqIOKcD6NpUKXarua8F2kukJ0MqD0Py+oZR3e5ksjDHAISDU05iGmPwQ==
+  dependencies:
+    hoist-non-react-statics "^3.3.2"
 
 react-navigation-stack@^2.1.1:
   version "2.5.1"
