@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TouchableOpacity, Platform } from 'react-native';
+import { TouchableOpacity, Platform, YellowBox } from 'react-native';
 
 import {
   Container,
@@ -37,6 +37,9 @@ export default class Room extends Component {
       value: false,
       device: props.route.params.room.control[0],
     };
+    YellowBox.ignoreWarnings([
+      'Non-serializable values were found in the navigation state',
+    ]);
   }
 
   renderItem = (room) => {
@@ -74,13 +77,15 @@ export default class Room extends Component {
 
   render() {
     var prop = this.props.route.params.room;
-    var backgroundColor, styleBar;
+    var backgroundColor, styleBar, iconColor;
 
     if (isDarkMode()) {
       backgroundColor = color.darkest;
+      iconColor = color.white;
       styleBar = 'light-content';
     } else {
       backgroundColor = color.white;
+      iconColor = color.darkest;
       styleBar = 'dark-content';
     }
 
@@ -129,7 +134,9 @@ export default class Room extends Component {
                 buttonWidth={20}
                 inactiveBackgroundColor={'rgba(242, 242, 242, 0.5)'}
                 activeBackgroundColor={'rgba(75, 144, 226, 1)'}
-                onChangeValue={() => this.setState({ value: !this.state.value })}
+                onChangeValue={() => {
+                  this.setState({ value: !this.state.value });
+                }}
               />
             </RightSide>
           </SafeView>
@@ -141,7 +148,7 @@ export default class Room extends Component {
               <Ionicons
                 name="ios-add-circle-outline"
                 size={24}
-                color={color.darkest}
+                color={iconColor}
               />
             </TouchableOpacity>
           </ActionTitleContainer>

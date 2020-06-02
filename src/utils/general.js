@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
 
 import { Entypo, FontAwesome5 } from '@expo/vector-icons';
 
@@ -29,7 +28,7 @@ export const color = {
 
 export function isDarkMode() {
   let darkMode = new Date().getHours() >= 18 ? true : false;
-  return darkMode;
+  return !darkMode;
 }
 
 export const profile = [
@@ -43,7 +42,7 @@ export const profile = [
         image: require('../../assets/images/bedroom.jpg'),
         control: [
           {
-            name: 'Luz Meio',
+            name: 'Luz Meio', // MAX 16
             icon: <FontAwesome5 name="lightbulb" size={24} color={color.darkest} />,
           },
           {
