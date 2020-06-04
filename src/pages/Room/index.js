@@ -23,23 +23,66 @@ import {
 
 import { Feather, Ionicons } from '@expo/vector-icons';
 
-import { color, isDarkMode } from '../../utils/general';
+import { color, isDarkMode, mqtt } from '../../utils/general';
 
 import BarStatus from '../../components/BarStatus';
 import TabIcon from '../../components/TabIcon';
 import Switch from 'react-native-customisable-switch';
+
+import MqttService from '../../services/MqttService';
 
 export default class Room extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      value: false,
+      value: true,
       device: props.route.params.room.control[0],
     };
     YellowBox.ignoreWarnings([
       'Non-serializable values were found in the navigation state',
     ]);
+  }
+
+  componentDidMount() {
+    MqttService.connectClient(
+      this.mqttSuccessHandler,
+      this.mqttConnectionLostHandler,
+    );
+  }
+
+  componentWillUnmount() {
+    console.info('disconnected from mqtt');
+    MqttService.disconnect();
+  }
+
+  mqttSuccessHandler = () => {
+    console.info('connected to mqtt');
+
+    var topic = `${mqtt.userName}/f/test`;
+
+    MqttService.subscribe(topic, this.onWORLD);
+
+    console.info(MqttService.isConnected);
+  }
+
+  onWORLD = message => {
+    console.info(`mensagem recebida: ${message}`);
+    var value = message == 'ligado' ? true : false;
+
+    this.setState({ value });
+  }
+
+  mqttConnectionLostHandler = () => {
+    console.info('disconnected from mqtt');
+
+    this.setState({ isConnected: false });
+  }
+
+  onPublish = () => {
+
+    this.setState({ value: !this.state.value });
+
   }
 
   renderItem = (room) => {
@@ -135,7 +178,10 @@ export default class Room extends Component {
                 inactiveBackgroundColor={'rgba(242, 242, 242, 0.5)'}
                 activeBackgroundColor={'rgba(75, 144, 226, 1)'}
                 onChangeValue={() => {
-                  this.setState({ value: !this.state.value });
+                  var topic = `${mqtt.userName}/f/test`;
+                  var value = !this.state.value;
+                  this.setState({ value });
+                  MqttService.publishMessage(topic, value ? 'ligado' : 'desligado');
                 }}
               />
             </RightSide>

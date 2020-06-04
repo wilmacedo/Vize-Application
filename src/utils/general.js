@@ -31,6 +31,14 @@ export function isDarkMode() {
   return !darkMode;
 }
 
+export const mqtt = {
+  host: 'io.adafruit.com',
+  port: 443,
+  clientId: 'rndebug',
+  userName: 'wilmacedo',
+  password: 'aio_VqMQ11RH6GX6OutcexyqUB7yIZLK',
+};
+
 export const profile = [
   {
     name: 'Wil Macedo', //MAX 14
