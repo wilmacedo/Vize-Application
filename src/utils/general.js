@@ -28,7 +28,7 @@ export const color = {
 
 export function isDarkMode() {
   let darkMode = new Date().getHours() >= 18 ? true : false;
-  return !darkMode;
+  return darkMode;
 }
 
 export const mqtt = {
@@ -36,7 +36,7 @@ export const mqtt = {
   port: 443,
   clientId: 'rndebug',
   userName: 'wilmacedo',
-  password: 'aio_VqMQ11RH6GX6OutcexyqUB7yIZLK',
+  password: 'aio_LZfj77RoXhaIgdUF8NAHamdwa6Sd',
 };
 
 export const profile = [

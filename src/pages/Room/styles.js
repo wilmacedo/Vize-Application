@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { Dimensions, StyleSheet, Plataform } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import { color, isDarkMode } from '../../utils/general';
 
@@ -36,7 +36,7 @@ export const ImageStyle = StyleSheet.create({
 });
 
 export const SafeView = styled.SafeAreaView`
-  margin: 0 -20px 0 30px;
+  margin: 0 30px 0 30px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -45,9 +45,8 @@ export const LeftSide = styled.View`
 `;
 
 export const RightSide = styled.View`
-  margin-top: ${Platform.OS === 'ios' ? 170 : 160}px;
+  margin-top: ${Platform.OS === 'ios' ? 120 : 110}px;
   justify-content: center;
-  transform: rotate(-90deg);
 `;
 
 export const Icon = styled.View`

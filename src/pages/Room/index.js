@@ -27,22 +27,16 @@ import { color, isDarkMode, mqtt } from '../../utils/general';
 
 import BarStatus from '../../components/BarStatus';
 import TabIcon from '../../components/TabIcon';
-import Switch from 'react-native-customisable-switch';
+import Switch from '../../components/Switch';
 
 import MqttService from '../../services/MqttService';
 
 export default class Room extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: true,
-      device: props.route.params.room.control[0],
-    };
-    YellowBox.ignoreWarnings([
-      'Non-serializable values were found in the navigation state',
-    ]);
-  }
+  state = {
+    value: true,
+    device: this.props.route.params.room.control[0],
+  };
 
   componentDidMount() {
     MqttService.connectClient(
@@ -61,12 +55,12 @@ export default class Room extends Component {
 
     var topic = `${mqtt.userName}/f/test`;
 
-    MqttService.subscribe(topic, this.onWORLD);
+    MqttService.subscribe(topic, this.Callback);
 
     console.info(MqttService.isConnected);
   }
 
-  onWORLD = message => {
+  Callback = message => {
     console.info(`mensagem recebida: ${message}`);
     var value = message == 'ligado' ? true : false;
 
@@ -80,9 +74,7 @@ export default class Room extends Component {
   }
 
   onPublish = () => {
-
     this.setState({ value: !this.state.value });
-
   }
 
   renderItem = (room) => {
@@ -109,7 +101,8 @@ export default class Room extends Component {
       return (
         <TouchableOpacity key={action.name}
           onPress={() => {
-            this.setState({ device: action })
+            this.setState({ device: action });
+            this.setState({ value: !this.state.value });
           }}
         >
           {tab}
@@ -120,6 +113,7 @@ export default class Room extends Component {
 
   render() {
     var prop = this.props.route.params.room;
+    var { value } = this.state;
     var backgroundColor, styleBar, iconColor;
 
     if (isDarkMode()) {
@@ -166,11 +160,17 @@ export default class Room extends Component {
               </Data>
               <Data>
                 <DataTitle>Percentual de Uso</DataTitle>
-                <DataInfo>{this.state.value ? 100 : 0}%</DataInfo>
+                <DataInfo>{value ? 100 : 0}%</DataInfo>
               </Data>
             </LeftSide>
             <RightSide>
               <Switch
+                height={200}
+                width={100}
+                value={value}
+                onChange={() => { this.setState({ value: !value }) }}
+              />
+              {/* <Switch
                 switchWidth={200}
                 switchHeight={100}
                 buttonHeight={90}
@@ -183,7 +183,7 @@ export default class Room extends Component {
                   this.setState({ value });
                   MqttService.publishMessage(topic, value ? 'ligado' : 'desligado');
                 }}
-              />
+              /> */}
             </RightSide>
           </SafeView>
         </ImageContainer>

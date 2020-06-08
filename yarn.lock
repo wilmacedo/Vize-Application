@@ -4412,11 +4412,6 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-customisable-switch@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-customisable-switch/-/react-native-customisable-switch-0.1.0.tgz#8df4f296467e8696d8cc44dd7619cf795fb441cb"
-  integrity sha1-jfTylkZ+hpbYzETddhnPeV+0Qcs=
-
 react-native-fade@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-fade/-/react-native-fade-1.0.3.tgz#e27cd5a75c0d09a9ee82d854fb3851006c228d23"
