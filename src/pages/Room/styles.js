@@ -45,7 +45,7 @@ export const LeftSide = styled.View`
 `;
 
 export const RightSide = styled.View`
-  margin-top: ${Platform.OS === 'ios' ? 120 : 110}px;
+  margin-top: ${Platform.OS === 'ios' ? 135 : 125}px;
   justify-content: center;
 `;
 

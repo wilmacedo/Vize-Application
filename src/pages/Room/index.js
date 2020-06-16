@@ -39,10 +39,10 @@ export default class Room extends Component {
   };
 
   componentDidMount() {
-    MqttService.connectClient(
-      this.mqttSuccessHandler,
-      this.mqttConnectionLostHandler,
-    );
+    // MqttService.connectClient(
+    //   this.mqttSuccessHandler,
+    //   this.mqttConnectionLostHandler,
+    // );
   }
 
   componentWillUnmount() {

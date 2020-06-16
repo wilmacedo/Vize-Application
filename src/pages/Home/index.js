@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TouchableOpacity, TouchableWithoutFeedback, Dimensions, ScrollView } from 'react-native';
+import { View, TouchableOpacity, TouchableWithoutFeedback, Dimensions, ScrollView } from 'react-native';
 import {
   SafeAreaView,
   Container,
@@ -22,27 +22,33 @@ import {
 
 import TabIcon from '../../components/TabIcon';
 import BarStatus from '../../components/BarStatus';
-
-import { Feather, Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
-
-import { LinearGradient } from 'expo-linear-gradient';
-import Carousel from 'react-native-snap-carousel';
-
+import BottomSheetAdd from '../../components/BottomSheetAdd';
 import { color, profile, isDarkMode } from '../../utils/general';
 
-import MqttService from '../../services/MqttService';
+import { Feather, Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import Carousel from 'react-native-snap-carousel';
+import Animated from 'react-native-reanimated';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.84);
 
 export default class Home extends Component {
 
+  state = {
+    canClick: true,
+  }
+
+  reference = React.createRef();
+  opacity = new Animated.Value(1);
+
   _renderItem = ({ item, index }) => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          this.props.navigation.navigate('Room', { room: item });
+          if (this.state.canClick) this.props.navigation.navigate('Room', { room: item });
         }}
+        disabled={!this.state.canClick}
       >
         <CardItem>
           <CardImage source={item.image} imageStyle={{ borderRadius: 20 }}>
@@ -62,78 +68,115 @@ export default class Home extends Component {
     var iconColor = isDarkMode() ? color.moreLight : color.darkest;
 
     return (
-      <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <BarStatus backgroundColor={color.lighitBackground} />
-          <Container>
-            <TopContainer>
-              <TouchableOpacity>
-                <Feather name="menu" size={26} color={iconColor} />
-              </TouchableOpacity>
+      <View
+        style={{ flex: 1, backgroundColor: 'black' }}
+      >
+        <BottomSheetAdd
+          reference={this.reference}
+          snapPoints={[500, 200, 0]}
+          callback={this.opacity}
+          onOpenStart={() => this.setState({ canClick: false })}
+          onCloseEnd={() => this.setState({ canClick: true })}
+          initialSnap={2}
+        />
+        <TouchableWithoutFeedback
+          onPress={() => {
+            if (!this.state.canClick) this.reference.current.snapTo(2)
+          }}
+        >
+          <Animated.View
+            style={{
+              flex: 1,
+              opacity: Animated.add(0.3, Animated.multiply(this.opacity, 0.9)),
+            }}
+          >
+            <SafeAreaView>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <BarStatus backgroundColor={color.lighitBackground} />
+                <Container>
+                  <TopContainer>
+                    <TouchableOpacity
+                      disabled={!this.state.canClick}
+                    >
+                      <Feather name="menu" size={26} color={iconColor} />
+                    </TouchableOpacity>
 
-              <ProfileContainer
-                onPress={() => this.props.navigation.navigate('Test')}
-              >
-                <ProfileImage source={require('../../../assets/images/perfil.jpg')} />
-              </ProfileContainer>
-            </TopContainer>
-          <TitleContainer>
-            <WelcomeText>Olá novamente,</WelcomeText>
-            <UserText>{profile[0].name}</UserText>
-          </TitleContainer>
-          <CardContainer>
-            <Title>
-              <TitleText>Cômodos</TitleText>
+                    <ProfileContainer
+                      onPress={() => { if (this.state.canClick) this.props.navigation.navigate('Test') }}
+                      disabled={!this.state.canClick}
+                    >
+                      <ProfileImage source={require('../../../assets/images/perfil.jpg')} />
+                    </ProfileContainer>
+                  </TopContainer>
+                  <TitleContainer>
+                    <WelcomeText>Olá novamente,</WelcomeText>
+                    <UserText>{profile[0].name}</UserText>
+                  </TitleContainer>
+                  <CardContainer>
+                    <Title>
+                      <TitleText>Cômodos</TitleText>
 
-              <TouchableOpacity>
-                <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
-              </TouchableOpacity>
-            </Title>
-            <Carousel
-              ref={ref => this.carousel = ref}
-              data={profile[0].rooms}
-              renderItem={this._renderItem}
-              sliderWidth={SLIDER_WIDTH}
-              containerCustomStyle={{ marginLeft: -30 }}
-              inactiveSlideScale={0.90}
-              itemWidth={ITEM_WIDTH}
-            />
-          </CardContainer>
-          <QuickActionsContainer>
-            <Title>
-              <TitleText>Ações rápidas</TitleText>
+                      <TouchableOpacity
+                        onPress={() => {
+                          if (this.reference != null) this.reference.current.snapTo(1);
+                        }}
+                        disabled={!this.state.canClick}
+                      >
+                        <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
+                      </TouchableOpacity>
+                    </Title>
+                    <Carousel
+                      ref={ref => this.carousel = ref}
+                      data={profile[0].rooms}
+                      renderItem={this._renderItem}
+                      sliderWidth={SLIDER_WIDTH}
+                      containerCustomStyle={{ marginLeft: -30 }}
+                      inactiveSlideScale={0.90}
+                      itemWidth={ITEM_WIDTH}
+                    />
+                  </CardContainer>
+                  <QuickActionsContainer>
+                    <Title>
+                      <TitleText>Ações rápidas</TitleText>
 
-              <TouchableOpacity>
-                <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
-              </TouchableOpacity>
-            </Title>
+                      <TouchableOpacity>
+                        <Ionicons name="ios-add-circle-outline" size={24} color={iconColor} />
+                      </TouchableOpacity>
+                    </Title>
 
-            <Scroll horizontal={true} showsHorizontalScrollIndicator={false}>
-              <TouchableOpacity>
-                <TabIcon
-                  icon={<MaterialCommunityIcons name="door" size={32} color={color.darkest} />}
-                  name={'Portas'}
-                  inScrollView={true}
-                  firstScrollView={true} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <TabIcon
-                  icon={<FontAwesome5 name="lightbulb" size={30} color={color.darkest} />}
-                  name={'Luzes'}
-                  inScrollView={true} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <TabIcon
-                  icon={<FontAwesome5 name="temperature-low" size={24} color={color.darkest} />}
-                  name={'Temperatura'}
-                  inScrollView={true}
-                  lastScrollView={true} />
-              </TouchableOpacity>
-            </Scroll>
-          </QuickActionsContainer>
-          </Container>
-        </ScrollView>
-      </SafeAreaView >
+                    <Scroll horizontal={true} showsHorizontalScrollIndicator={false}>
+                      <TouchableOpacity>
+                        <TabIcon
+                          icon={<FontAwesome5 name="door-open" size={35} color={color.darkest} />}
+                          name={'Portas'}
+                          inScrollView={true}
+                          firstScrollView={true}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity>
+                        <TabIcon
+                          icon={<FontAwesome5 name="lightbulb" size={35} color={color.darkest} />}
+                          name={'Luzes'}
+                          inScrollView={true}
+                          status={true}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity>
+                        <TabIcon
+                          icon={<FontAwesome5 name="temperature-low" size={35} color={color.darkest} />}
+                          name={'Temperatura'}
+                          inScrollView={true}
+                          lastScrollView={true}
+                        />
+                      </TouchableOpacity>
+                    </Scroll>
+                  </QuickActionsContainer>
+                </Container>
+              </ScrollView>
+            </SafeAreaView >
+          </Animated.View>
+        </TouchableWithoutFeedback>
+      </View>
     );
   }
 }
